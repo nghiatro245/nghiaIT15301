@@ -2,8 +2,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Insert title here</title>
+
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap.min.css"></link>
 </head>
 <body>
@@ -68,7 +69,7 @@
 					<td>Username</td>
 					<td>Email</td>
 					<td>Tài khoản</td>
-					<td>Trạng thái</td>
+					<td>Status</td>
 					<td colspan="2">Thao tác</td>
 				</tr>
 			</thead>
@@ -79,7 +80,7 @@
 						<td>Huong ny</td>
 						<td>hny@gmail</td>
 						<td>${user.admin == 1? "Admin" : "User" }</td>
-						<td>${user.activated ==1? "Đang hoạt động" : "Vô hiệu hóa" }</td>
+						<td>${user.activated ==1? "Active" : "Inactive" }</td>
 						<td>
 							<a class="btn btn-primary"
 								href="${pageContext.request.contextPath }/admin/users/edit/1">Update</a>

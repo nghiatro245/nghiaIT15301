@@ -1,71 +1,76 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <title>Insert title here</title>
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/bootstrap.min.css" ></link>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light px-5">
-		<a class="navbar-brand" href="#">Navbar</a>
-		
-		<div class="collapse navbar-collapse">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="#">Users</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Categories</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Products</a>
-				</li>
-			</ul>
-		</div>
+	  <a class="navbar-brand" href="#">Navbar</a>
+	
+	  <div class="collapse navbar-collapse">
+	    <ul class="navbar-nav mr-auto">
+	      <li class="nav-item active">
+	        <a class="nav-link" href="#">Users</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#">Categories</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#">Products</a>
+	      </li>
+	    </ul>
+	  </div>
 	</nav>
+
 	<div class="mt-5 col-10 offset-1">
-		<form:form 
+		<form:form
 			modelAttribute="user"
 			method="POST"
-			action="${pageContext.request.contextPath }/admin/users/update/1">
-			<input type="hidden" name="_method" value="put" />
+			action="${ pageContext.request.contextPath }/admin/users/update/1">
+			<input type="hidden" name="_method" value="put" />			
 			<div class="form-group mt-3">
 				<label for="name">Name</label>
-				<form:input path="username" class="form-control" autocomplete="off" />
-				<form:errors path="username" element="span" cssClass="text-danger" />
+			    <form:input path="name" class="form-control" id="name" name="name" autocomplete="off" />
+			    <form:errors path="name" element="span" cssClass="text-danger"/>
 			</div>
 			<div class="form-group mt-3">
 				<label for="email">Email</label>
-				<form:input path="email" class="form-control" id="email" name="email" autocomplete="off" />
-				<form:errors path="email" element="span" cssClass="text-danger" />
+			    <form:input path="email" class="form-control" id="email" name="email" autocomplete="off" />
+			    <form:errors path="email" element="span" cssClass="text-danger"/>
 			</div>
 			<div class="form-group mt-3">
 				<label for="password">Password</label>
-				<form:password path="password" value="******" name="password" class="form-control" readonly="true"/>
-				<form:errors path="password" element="span" cssClass="text-danger" />
+				<form:password path="password" value="*********" name="password" class="form-control" readonly="true"/>
+				<form:errors path="password" element="span" cssClass="text-danger"/>
 			</div>
 			<div class="form-group mt-3">
-				<label for="admin">Tài khoản</label>
-				<form:select path="admin" id="admin" class="form-control">
+				<label for="dob">Date of Birth</label>
+			    <form:input type ="date" path="dob" class="form-control" id="dob" name="dob" autocomplete="off" />
+			    <form:errors path="dob" element="span" cssClass="text-danger"/>
+			</div>
+			<div class="form-group mt-3">
+				<label for="role">Role</label>
+				<form:select path="role" id="role" class="form-control">
 					<form:option value="1">Admin</form:option>
-					<form:option value="">Member</form:option>
+					<form:option value="0">Member</form:option>
+					<form:errors path="role" element="span" cssClass="text-danger"/>
 				</form:select>
-				<form:errors path="admin" element="span" cssClass="text-danger" />
 			</div>
 			<div class="form-group mt-3">
-				<label for="photo">Image</label>
-				<input type="file" class="form-control" id="photo" name="photo">
+				<label for="avatar">Image</label>
+			    <input type="file" class="form-control" id="photo" name="photo">
 			</div>
 			<div class="form-group mt-3">
 				<label for="status">Trạng thái</label>
-				<form:select path="activated" id="activated" class="form-control">
-					<form:option value="1">Đang hoạt động</form:option>
-					<form:option value="0">Vô hiệu hóa</form:option>
+				<form:select path="status" id="status" class="form-control">
+					<form:option value="1">Active</form:option>
+					<form:option value="0">Inactive</form:option>
 				</form:select>
-				<form:errors path="activated" element="span" cssClass="text-danger" />
+				<form:errors path="status" element="span" cssClass="text-danger"/>
 			</div>
 			<div class="form-group mt-3">
 				<button class="btn btn-primary">Submit</button>

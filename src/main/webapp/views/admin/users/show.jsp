@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,8 +18,8 @@
 			<label class="col-6">${ user.email }</label>		
 		</div>
 		<div class="row col-12">
-			<label class="col-4">Trạng thái</label>		
-			<label class="col-6">${ user.activated == 1 ? "Đang hoạt động" : "Vô hiệu hóa" }</label>		
+			<label class="col-4">Status</label>		
+			<label class="col-6">${ user.activated == 1 ? "Active" : "Inactive" }</label>		
 		</div>
 		<div class="row col-12">
 			<label class="col-4">Tài khoản</label>		
