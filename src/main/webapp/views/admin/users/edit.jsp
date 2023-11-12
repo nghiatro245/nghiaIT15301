@@ -33,9 +33,9 @@
 			action="${ pageContext.request.contextPath }/admin/users/update/1">
 			<input type="hidden" name="_method" value="put" />			
 			<div class="form-group mt-3">
-				<label for="name">Name</label>
-			    <form:input path="name" class="form-control" id="name" name="name" autocomplete="off" />
-			    <form:errors path="name" element="span" cssClass="text-danger"/>
+				<label for="username">Name</label>
+			    <form:input path="username" class="form-control" id="username" autocomplete="off" />
+			    <form:errors path="username" element="span" cssClass="text-danger"/>
 			</div>
 			<div class="form-group mt-3">
 				<label for="email">Email</label>
@@ -48,29 +48,24 @@
 				<form:errors path="password" element="span" cssClass="text-danger"/>
 			</div>
 			<div class="form-group mt-3">
-				<label for="dob">Date of Birth</label>
-			    <form:input type ="date" path="dob" class="form-control" id="dob" name="dob" autocomplete="off" />
-			    <form:errors path="dob" element="span" cssClass="text-danger"/>
-			</div>
-			<div class="form-group mt-3">
-				<label for="role">Role</label>
-				<form:select path="role" id="role" class="form-control">
+				<label for="admin">Role</label>
+				<form:select path="admin" id="admin" class="form-control">
 					<form:option value="1">Admin</form:option>
 					<form:option value="0">Member</form:option>
-					<form:errors path="role" element="span" cssClass="text-danger"/>
+					<form:errors path="admin" element="span" cssClass="text-danger"/>
 				</form:select>
 			</div>
 			<div class="form-group mt-3">
-				<label for="avatar">Image</label>
+				<label for="photo">Image</label>
 			    <input type="file" class="form-control" id="photo" name="photo">
 			</div>
 			<div class="form-group mt-3">
-				<label for="status">Trạng thái</label>
-				<form:select path="status" id="status" class="form-control">
+				<label for="activated">Trạng thái</label>
+				<form:select path="activated" id="activated" class="form-control">
 					<form:option value="1">Active</form:option>
 					<form:option value="0">Inactive</form:option>
 				</form:select>
-				<form:errors path="status" element="span" cssClass="text-danger"/>
+				<form:errors path="activated" element="span" cssClass="text-danger"/>
 			</div>
 			<div class="form-group mt-3">
 				<button class="btn btn-primary">Submit</button>

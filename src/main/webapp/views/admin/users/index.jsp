@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap.min.css"></link>
 </head>
 <body>
@@ -74,11 +74,11 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${pageDate.content }" var="user">
+				<c:forEach items="${listUser }" var="user">
 					<tr>
-						<td>1</td>
-						<td>Huong ny</td>
-						<td>hny@gmail</td>
+						<td>${user.id }</td>
+						<td>${user.username }</td>
+						<td>${user.email }</td>
 						<td>${user.admin == 1? "Admin" : "User" }</td>
 						<td>${user.activated ==1? "Active" : "Inactive" }</td>
 						<td>
@@ -91,7 +91,7 @@
 		</table>
 		<div>
 			<ul class="pagination">
-				<c:forEach begin="0" end="${pageData.totalPages - 1 }" varStatus="page">
+				<c:forEach begin="0" end="${pageData.totalPages }" varStatus="page">
 					<li class="page-item">
 						<a class="page-link">${page.index +1 }</a>
 					</li>

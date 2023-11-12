@@ -1,6 +1,7 @@
 package com.it15301.controller.admin;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.SpringVersion;
@@ -12,7 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.it15301.dto.User;
+import com.it15301.dto.UserDTO;
+import com.it15301.entity.User;
+import com.it15301.mappers.UserMapper;
+import com.it15301.repositories.UserRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -22,20 +26,31 @@ import jakarta.validation.Valid;
 public class UserController {
 	@Autowired
 	private HttpServletRequest request;
+	
+	@Autowired
+	private UserRepository userRepo;
+	
+	@Autowired
+	private UserMapper mapper;
+	
 	@GetMapping
-	public String index() {
+	public String index(Model model) {
+		
+		List<User> listUser = this.userRepo.findAll();
+		
+		model.addAttribute("listUser", listUser);
+		
 		return "admin/users/index";
 	}
 	
 	@GetMapping(value="{id}")
-	public String show(
-			Model model,
-			@PathVariable(name="id") Integer id) {
+	public String show(Model model,
+			@PathVariable(name="id") User entity) {
+//		User entity = this.userRepo.getReferenceById(id);
 		
-//		this.request.getParameter("id");
-		System.out.println("id: "+id);
+		UserDTO dto = this.mapper.convertToDTO(entity);
 		
-		model.addAttribute("id", id);
+		model.addAttribute("user", dto);
 		return "admin/users/show";
 	}
 	
@@ -45,37 +60,36 @@ public class UserController {
 	}
 	
 	@PostMapping(value="/store")
-	public String store() {
-		return "redirect:/admin/users";
+	public String store(Model model,
+						@Valid UserDTO dto,
+						BindingResult result) {
+		if(result.hasErrors()) {
+			System.out.println("Có lỗi");
+			model.addAttribute("errors", result.getAllErrors());
+			return "admin/users/create";
+		}else {
+			
+			User entity = this.mapper.convertToEntity(dto);
+			this.userRepo.save(entity);
+			return "redirect:/admin/users";
+		}
 	}
 	
 	@GetMapping(value="/edit/{id}")
-	public String edit(Model model) {
+	public String edit(Model model,
+						@PathVariable("id") User entity) {
+		UserDTO dto = this.mapper.convertToDTO(entity);
+//		UserDTO user = new UserDTO();
 		
-		User user = new User();
-		
-		user.setId(1);
-		user.setName("Tran huong ly");
-		user.setStudentCode("hny123");
-		user.setEmail("hny123@gmail");
-		user.setPassword("123");
-		user.setDob(new Date(2002,01,01));
-		user.setAvatar("");
-		user.setRole(1);
-		user.setGender(2);
-		user.setStatus(1);
-		
-		model.addAttribute("user", user);
+		model.addAttribute("user", dto);
 //		model.addAttribute(user);
-		
-//		System.out.println("version: "+ SpringVersion.getVersion());
 		
 		return "admin/users/edit";
 	}
 	
 	@PostMapping(value="/update/{id}")
 	public String update(Model model,
-			@Valid User user,
+			@Valid UserDTO user,
 			BindingResult result) {
 		
 		if(result.hasErrors()) {
@@ -85,15 +99,15 @@ public class UserController {
 			return "admin/users/edit";
 		}else {
 			System.out.println("Không có lỗi");
+			User entity = this.mapper.convertToEntity(user);
+			this.userRepo.save(entity);
 			return "redirect:/admin/users";
 		}
-		
 	}
 	
 	@PostMapping(value="/delete/{id}")
-	public String delete() {
+	public String delete(@PathVariable("id") Integer id) {
+		this.userRepo.deleteById(id);
 		return "redirect:/admin/users";
 	}
-	
-	
 }

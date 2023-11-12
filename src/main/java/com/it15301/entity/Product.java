@@ -1,13 +1,12 @@
 package com.it15301.entity;
 
-import java.util.List;
+import java.sql.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,31 +18,27 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="users")
-public class User {
+@Table(name="products")
+public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private Integer id;
 	
-	@Column(name="username")
-	private String username;
+	@Column(name="name")
+	private String name;
 	
-	@Column(name="password")
-	private String password;
+	@Column(name="image")	
+	private String image;
 	
-	@Column(name="email")
-	private String email;
+	@Column(name="price")
+	private Integer price;
 	
-	@Column(name="photo")
-	private String photo;
+	@Column(name="create_date")
+	private Date createDate;
 	
-	@Column(name="activated")
-	private Integer activated;
+	@Column(name="available")
+	private Integer available;
 	
-	@Column(name="admin")
-	private Integer admin;
-	
-	@OneToMany(mappedBy="user")
-	private List<Order> orders;
+//	private Integer category_id;
 }

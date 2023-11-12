@@ -15,17 +15,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
-	@Null
+public class UserDTO {
 	private Integer id;
 	
 	@NotNull
 	@NotBlank
-	private String name;
-	
-	@NotNull
-	@NotBlank
-	private String studentCode;
+	private String username;
 	
 	@NotNull
 	@NotBlank
@@ -36,23 +31,17 @@ public class User {
 	@NotBlank
 	private String password;
 	
-	@NotNull
-	@NotBlank
-	private String passwordConfirm;
+//	@NotNull
+//	@NotBlank
+//	private String passwordConfirm;
+	
+//	@NotNull
+//	@NotBlank
+	private String photo;
 	
 	@NotNull
-	private Date dob;
-	
+	private Integer admin;
+
 	@NotNull
-	@NotBlank
-	private String avatar;
-	
-	@NotNull
-	private Integer role;
-	
-	@NotNull
-	private Integer gender;
-	
-	@NotNull
-	private Integer status;
+	private Integer activated;
 }
